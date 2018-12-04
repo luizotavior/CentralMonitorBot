@@ -41,6 +41,6 @@ class UptimeCheckRecovered implements ShouldQueue
     }
     public function getMessageText(): string
     {
-        return "{$this->monitor->url} has recovered after {$this->downtimePeriod->duration()}";
+        return "{$this->monitor->url} has recovered after {$this->downtimePeriod->toText()}";
     }
 }
