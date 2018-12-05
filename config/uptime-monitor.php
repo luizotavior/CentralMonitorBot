@@ -30,7 +30,7 @@ return [
          */
         'resend_uptime_check_failed_notification_every_minutes' => 60,
         'mail' => [
-            'to' => ['luiz.otavior18@gmail.com'],
+            'to' => [env('MONITOR_TO_ADDRESS')],
         ],
 
         'slack' => [
