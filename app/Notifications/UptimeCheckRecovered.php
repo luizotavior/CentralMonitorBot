@@ -62,6 +62,10 @@ class UptimeCheckRecovered extends BaseNotification
             });
     }
 
+    public function getTelegrams(){
+        return Monitor_Telegram::find($this->getMonitor()->id)->telegrams()->get();
+    }
+    
     public function getMonitorProperties($extraProperties = []): array
     {
         $extraProperties = [

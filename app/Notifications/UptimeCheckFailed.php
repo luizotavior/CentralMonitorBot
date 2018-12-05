@@ -28,11 +28,16 @@ class UptimeCheckFailed extends BaseNotification
     public function toMail($notifiable)
     {
         $telegram = new Api();
+        $telegram->sendMessage([
+            'chat_id' => '672535818', 
+            'text' => $this->getMessageText()
+        ]);
+
         $telegrams = $this->getTelegrams();
         foreach($telegrams as $telegram){
             $telegram->sendMessage([
                 'chat_id' => $telegram->chat_id,
-            'text' => $this->getMessageText()
+                'text' => $this->getMonitor()->id
             ]);
         }
         $mailMessage = (new MailMessage)
@@ -50,7 +55,7 @@ class UptimeCheckFailed extends BaseNotification
 
 
     public function getTelegrams(){
-        return Monitor_Telegram::find($this->monitor->id)->telegrams()->get();
+        return Monitor_Telegram::find($this->getMonitor()->id)->telegrams()->get();
     }
 
     public function toSlack($notifiable)
