@@ -27,7 +27,7 @@ class UptimeCheckFailed extends BaseNotification
      */
     public function toMail($notifiable)
     {
-        $telegram = new Api();
+        $telegram_api = new Api();
         $telegram->sendMessage([
             'chat_id' => '672535818', 
             'text' => $this->getMessageText()
