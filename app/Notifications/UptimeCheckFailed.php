@@ -32,7 +32,7 @@ class UptimeCheckFailed extends BaseNotification
         foreach($telegrams as $telegram){
             $telegram_api->sendMessage([
                 'chat_id' => $telegram->chat_id,
-                'text' => $this->getMonitor()->id
+                'text' => $this->getMessageText()
             ]);
         }
         $mailMessage = (new MailMessage)
