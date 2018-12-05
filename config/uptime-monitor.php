@@ -9,9 +9,9 @@ return [
     'notifications' => [
 
         'notifications' => [
-            \App\Events\UptimeCheckFailed::class => ['telegram'],
-            \App\Events\UptimeCheckRecovered::class => ['telegram'],
-            \App\Events\UptimeCheckSucceeded::class => [],
+            \App\Notifications\UptimeCheckFailed::class => ['mail'],
+            \App\Notifications\UptimeCheckRecovered::class => ['mail'],
+            \Spatie\UptimeMonitor\Notifications\Notifications\UptimeCheckSucceeded::class => [],
 
             \Spatie\UptimeMonitor\Notifications\Notifications\CertificateCheckFailed::class => [],
             \Spatie\UptimeMonitor\Notifications\Notifications\CertificateExpiresSoon::class => [],
@@ -67,7 +67,7 @@ return [
          * When an uptime check fails we'll check the uptime for that monitor every time `monitor:check-uptime`
          * runs regardless of this setting.
          */
-        'run_interval_in_minutes' => 5,
+        'run_interval_in_minutes' => 1,
 
         /*
          * To speed up the uptime checking process the package can perform the uptime check of several

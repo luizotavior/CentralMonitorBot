@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         Telegram\Bot\Laravel\TelegramServiceProvider::class,
+        NotificationChannels\Telegram\TelegramServiceProvider::class,
         /*
          * Application Service Providers...
          */
