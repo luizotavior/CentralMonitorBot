@@ -27,10 +27,10 @@ class UptimeCheckRecovered extends BaseNotification
      */
     public function toMail($notifiable)
     {
-        $telegram = new Api();
+        $telegram_api = new Api();
         $telegrams = $this->getTelegrams();
         foreach($telegrams as $telegram){
-            $telegram->sendMessage([
+            $telegram_api->sendMessage([
             'chat_id' => $telegram->chat_id,
             'text' => $this->getMessageText()
             ]);
@@ -65,7 +65,7 @@ class UptimeCheckRecovered extends BaseNotification
     public function getTelegrams(){
         return Monitor_Telegram::find($this->getMonitor()->id)->telegrams()->get();
     }
-    
+
     public function getMonitorProperties($extraProperties = []): array
     {
         $extraProperties = [
