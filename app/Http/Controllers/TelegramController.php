@@ -61,6 +61,10 @@ class TelegramController extends Controller
             $this->sendMessage('Você não esta registrado. Se registre em "/register"');
             return;
         }
+        if($updates['message']['chat']['type'] != $user->type){
+            $user->type = $updates['message']['chat']['type'];
+            $user->save();
+        }
         $conversation = Conversation::create([
             'telegram_id' => $user->id,
             'from_id' => isset($updates['message']['from']['id']) ? $updates['message']['from']['id'] : '',
