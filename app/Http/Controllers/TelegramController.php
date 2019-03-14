@@ -8,18 +8,18 @@ use Telegram\Bot\Api;
 use function GuzzleHttp\json_encode;
 use App\Conversation;
 class TelegramController extends Controller
-{    
+{
     protected $telegram;
     protected $chat_id;
     protected $user_id;
     protected $text;
- 
-    
+
+
     public function __construct(Api $telegram)
     {
         $this->telegram = $telegram;
     }
- 
+
     public function getMe()
     {
         $response = $this->telegram->getMe();
@@ -29,8 +29,12 @@ class TelegramController extends Controller
     {
         $url = 'https://monitor.luizotavior.com.br/' . env('TELEGRAM_BOT_TOKEN') . '/webhook';
         $response = $this->telegram->setWebhook(['url' => $url]);
-    
+
         return $response == true ? redirect()->back() : dd($response);
+    }
+
+    public function removeWebHook(){
+        $response = $this->telegram->removeWebhook();
     }
 
     public function handleRequest(Request $request)
@@ -81,9 +85,9 @@ class TelegramController extends Controller
             'chat_id' => $this->chat_id,
             'text' => $message,
         ];
- 
+
         if ($parse_html) $data['parse_mode'] = 'HTML';
- 
+
         $this->telegram->sendMessage($data);
     }
 }
