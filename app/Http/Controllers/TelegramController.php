@@ -40,6 +40,11 @@ class TelegramController extends Controller
     public function handleRequest(Request $request)
     {
         $updates = $this->telegram->getWebhookUpdates();
+        if(isset($updates['parameters']['migrate_to_chat_id']) && isset($updates['message']['chat']['id'])){
+            $user = \App\Telegram::where('chat_id',$this->chat_id)->first();
+            $user->chat_id = $updates['parameters']['migrate_to_chat_id'];
+            $user->save();
+        }
         if(!isset($updates['message']['chat']['id']) or !isset($updates['message']['text'])){
               return;
         }
