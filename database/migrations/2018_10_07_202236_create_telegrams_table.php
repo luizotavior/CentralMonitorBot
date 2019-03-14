@@ -12,14 +12,14 @@ class CreateTelegramsTable extends Migration
      * @return void
      */
     public function up()
-    {    
+    {
         Schema::create('telegrams', function (Blueprint $table) {
             $table->increments('id');
             $table->string('chat_id')->unique();
             $table->string('title')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->enum('type', ['private', 'group']);
+            $table->enum('type', ['private', 'group', 'supergroup', 'channel']);
             $table->timestamps();
         });
     }
